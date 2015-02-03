@@ -20,7 +20,7 @@ public class HttpListnerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_http_listner);
-
+		
 		try {
 			server = new MyHTTPD();
 			server.start();
@@ -43,14 +43,10 @@ public class HttpListnerActivity extends Activity {
   	      super(2200);
   	    }
   	 
-		
+
 		@Override
-		@Deprecated
-		public Response serve(String uri, Method method,
-				Map<String, String> headers, Map<String, String> parms,
-				Map<String, String> files) {
-			
-	  	      final String html = "<html><head><head><body><h1>Hello, World</h1></body></html>";
+		public Response serve(IHTTPSession session) {
+	  	      final String html = "<html><head><head><body><h1>Helloww, World</h1></body></html>";
 	  	      return new NanoHTTPD.Response(Response.Status.OK, MIME_HTML, html);
 		}
 		
