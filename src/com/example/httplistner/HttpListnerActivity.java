@@ -1,7 +1,9 @@
 package com.example.httplistner;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Map.Entry;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Properties;
 
@@ -46,8 +48,22 @@ public class HttpListnerActivity extends Activity {
 
 		@Override
 		public Response serve(IHTTPSession session) {
-	  	      final String html = "<html><head><head><body><h1>Helloww, World</h1></body></html>";
-	  	      return new NanoHTTPD.Response(Response.Status.OK, MIME_HTML, html);
+			
+			Hashtable<String, String> body = new Hashtable<String, String>();
+			try {
+				session.parseBody(body);
+				System.out.println(body.toString());
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ResponseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			final String html = "<html><head><head><body><h1>Helloww, World</h1></body></html>";
+			return new NanoHTTPD.Response(Response.Status.OK, MIME_HTML, html);
 		}
 		
   	  }
